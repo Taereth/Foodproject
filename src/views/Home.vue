@@ -32,6 +32,7 @@ export default {
         center: new google.maps.LatLng(47.071467, 8.277621)
     }
     this.map = new google.maps.Map(element, options);
+    console.log("Hallo");
 
     client.getEntry('GmaDHEoU8esUEys6Wyiwe')
       .then(function (entry) {
