@@ -11,8 +11,8 @@ new Vue({
 }).$mount("#app");
 
 window.contentfulClient = createClient({
-    accessToken: '64d6a750c7ae5a7c93603911e56166b198ce5ab94be05261848e8a280ba8972c',
-    space: '7la5sjify8om'
+    accessToken: '27243c8cabc12720b696d4687d01f3158787ea6a93063f3b23690a75bc1caada',
+    space: 'nyazvzij5ixn'
 });
 
 contentfulClient.getEntries()
