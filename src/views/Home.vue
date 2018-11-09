@@ -32,6 +32,20 @@ export default {
         center: new google.maps.LatLng(47.071467, 8.277621)
     }
     this.map = new google.maps.Map(element, options);
+
+    client.getEntry('GmaDHEoU8esUEys6Wyiwe')
+      .then(function (entry) {
+      // logs the entry metadata
+
+      var myLatLng = {lat: entry.fields.lat, lng: entry.fields.lng};
+      var marker = new google.maps.Marker({
+        position: myLatLng
+        map: map
+        title: 'test'
+      });
+    })
+
+
   }
 };
 </script>
