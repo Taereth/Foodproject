@@ -37,6 +37,8 @@ export default {
       .then(function (entry) {
       // logs the entry metadata
 
+      console.log("Hallo");
+
       var myLatLng = {lat: entry.fields.lat, lng: entry.fields.lng};
       var marker = new google.maps.Marker({
         position: myLatLng
