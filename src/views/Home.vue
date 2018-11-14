@@ -3,6 +3,8 @@
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Yo" />
     <div id="map"></div>
+
+
   </div>
 
 
