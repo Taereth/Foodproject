@@ -48,7 +48,8 @@ export default {
     .then((entries)=>{
 
       entries.items.forEach((entry)=>{
-      if(entry.fields.passwort = this.passwordinput){
+      if(entry.fields.passwort == this.passwordinput){
+        document.cookie = "username="+this.usernameinput;
         this.$router.push("/homescreen");
       }
       else{

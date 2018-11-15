@@ -12,6 +12,7 @@
 
 
     <h1>Current User: {{currentUser}}</h1>
+    <h2>{{events}}</h2>
     <button v-on:click="listmode">LISTMODE</button>
 
 
@@ -36,7 +37,8 @@ export default {
     HelloWorld
   },data: function(){
     return {
-      currentUser: getCookie("username")
+      currentUser: getCookie("username"),
+      events: ""
     }
 },methods: {
   listmode(){

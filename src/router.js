@@ -55,6 +55,15 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/NewUser.vue")
+    },
+    {
+      path: "/listmode",
+      name: "listmode",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/ListMode.vue")
     }
   ]
 });
