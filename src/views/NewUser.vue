@@ -61,7 +61,21 @@ export default {
 
   }
     )
-    
+    window.contentfulClientUpdate.getSpace('nyazvzij5ixn')
+    .then((space)=>space.getEntries({
+    'content_type': 'user',
+    'fields.name': this.newusernameinput
+  })
+  .then((entries)=>{
+
+    entries.items.forEach((entry)=>{
+
+      entry.publish();
+
+    })
+  })
+  .catch())
+
   }
 
 },
