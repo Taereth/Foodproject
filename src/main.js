@@ -16,9 +16,6 @@ window.contentfulClientUpdate = managementClient({
     accessToken: 'CFPAT-b313bded7fa4a871b52834b41bca7f3ade8cf532daac79819562f73979ef4796'
 });
 
-contentfulClient.getEntries()
-.then((response) => console.log(response.items))
-.catch(console.error);
 
 new Vue({
   router,

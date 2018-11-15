@@ -66,13 +66,11 @@ export default {
       .then((entry)=>{
         var currentVersion= entry.sys.version;
         currentVersion+=1;
-
-        entry.fields.number['en-US']=countup;
-        entry.update();
-        entry.publish();
         console.log(entry.fields.number);
-
-      })
+        this.numberx = countup;
+        entry.fields.number['en-US']=countup;
+        return entry.update();
+      }).then(entry =>{ return entry.publish();})
     })
 
   }
@@ -88,6 +86,10 @@ export default {
 
     })
     .catch(console.error);
+
+    
+
+
 
   }
 };
