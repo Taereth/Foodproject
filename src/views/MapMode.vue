@@ -74,7 +74,6 @@ export default {
     entries.items.forEach((entry)=>{
       var newEvent = new event(entry)
       events.push(newEvent);
-      console.log(events.length);
 
 
     })
@@ -119,16 +118,35 @@ function initMarkers(){
       title: eventname
     });
 
-    marker.addListener('click',function(){
-      mapref.setZoom(10);
-      mapref.setCenter(marker.getPosition());
-    })
 
+
+    let contentString = `<div>
+                        <h1>` + events[i].name + `</h1>
+                        <p>` +  events[i].food + `</p>
+                        <p>` +  events[i].time + `</p>
+                    </div>`;
+
+    let infowindow = new google.maps.InfoWindow({
+                content: " "
+                });
+
+    console.log(marker);
+    bindWindow(marker,mapref,infowindow,contentString);
 
     markers.push(marker);
 
 
+
+
+
   }
+}
+
+function bindWindow(marker,map,infowindow,html){
+  marker.addListener('click',function(){
+    infowindow.setContent(html);
+    infowindow.open(mapref,this)
+  })
 }
 
 class event{
