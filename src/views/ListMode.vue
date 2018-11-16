@@ -13,7 +13,16 @@
 
     <h1>Current User: {{currentUser}}</h1>
     <h2>This will be the Listmode</h2>
-    <li v-for="event in shownevents">{{event.name}} von {{event.owner.fields.name}} | {{event.food}} | {{event.time}} | {{event.location}}</li>
+    <h3>Sort by</h3>
+    <input  type="checkbox" v-model="vegetarian" v-on:change="updateList">Vegetarian</input>
+    <input  type="checkbox" v-model="vegan" v-on:change="updateList">Vegan</input>
+    <input  type="checkbox" v-model="meat" v-on:change="updateList">Meat</input>
+    <p>{{vegetarian}}  {{vegan}}  {{meat}}</p>
+    <li v-for="event in shownevents" v-if="event.seen">{{event.name}} von {{event.owner.fields.name}} | {{event.food}} | {{event.time}} | {{event.location}}
+      <p> </p>
+      <button>Apply</button>
+      <p> </p>
+    </li></button>
 
 
 
@@ -40,17 +49,40 @@ export default {
   },data: function(){
     return {
       currentUser: Helper.getCookie("username"),
-      shownevents: events
+      shownevents: events,
+      vegetarian: true,
+      vegan: true,
+      meat: true
     }
 },methods: {
+  updateList(){
+         for(var i=0;i<events.length;i++){
+           if(this.vegetarian == true && events[i].vegetarian == true){
+             events[i].seen = true;
+           }
+           else if(this.vegan == true && events[i].vegan == true){
+             events[i].seen = true;
+           }
+           else if(this.meat == true && events[i].meat == true){
+             events[i].seen = true;
+           }
+           else{
+             events[i].seen = false;
+           }
+         }
+  }
 
 },
   mounted: function(){
 
-    console.log(Helper.getCookie("username"));
+    console.log(this.vegetarian);
+    console.log(this.vegan);
+    console.log(this.meat);
+
+
 
     window.contentfulClient.getEntries({
-    'content_type': 'event',
+    'content_type': 'event'
   })
   .then((entries)=>{
 
@@ -78,6 +110,10 @@ class event{
     this.location = entry.fields.location
     this.owner = entry.fields.owner
     this.time = entry.fields.time
+    this.vegetarian = entry.fields.vegetarian
+    this.vegan = entry.fields.vegan
+    this.meat = entry.fields.meat
+    this.seen = true
   }
 }
 
