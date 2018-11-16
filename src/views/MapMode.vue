@@ -13,6 +13,9 @@
 
     <h1>Current User: {{currentUser}}</h1>
     <h2>This will be the MapMode</h2>
+    <input  type="checkbox" v-model="vegetarian" v-on:change="updateList">Vegetarian</input>
+    <input  type="checkbox" v-model="vegan" v-on:change="updateList">Vegan</input>
+    <input  type="checkbox" v-model="meat" v-on:change="updateList">Meat</input>
     <div id="map"></div>
 
 
@@ -50,9 +53,32 @@ export default {
   },data: function(){
     return {
       currentUser: Helper.getCookie("username"),
-      shownevents: events
+      shownevents: events,
+      vegetarian: true,
+      vegan: true,
+      meat: true
     }
 },methods: {
+  updateList(){
+
+           for(var i=0;i<events.length;i++){
+             if(this.vegetarian == true && events[i].vegetarian == true){
+               markers[i].setVisible(true);
+             }
+             else if(this.vegan == true && events[i].vegan == true){
+               markers[i].setVisible(true);
+             }
+             else if(this.meat == true && events[i].meat == true){
+               markers[i].setVisible(true);
+             }
+             else{
+               markers[i].setVisible(false);
+             }
+           }
+
+
+
+  }
 
 },
   mounted: function(){
@@ -145,7 +171,7 @@ function initMarkers(){
 function bindWindow(marker,map,infowindow,html){
   marker.addListener('click',function(){
     infowindow.setContent(html);
-    infowindow.open(mapref,this)
+    infowindow.open(mapref,this);
   })
 }
 
@@ -156,6 +182,9 @@ class event{
     this.location = entry.fields.location
     this.owner = entry.fields.owner
     this.time = entry.fields.time
+    this.vegetarian = entry.fields.vegetarian
+    this.vegan = entry.fields.vegan
+    this.meat = entry.fields.meat
   }
 }
 
