@@ -27,7 +27,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 var countup;
 
 export default {
-  name: "Test",
+  name: "newuser",
   components: {
     HelloWorld
   },data: function(){

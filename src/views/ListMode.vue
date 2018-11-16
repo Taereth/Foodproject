@@ -12,8 +12,9 @@
 
 
     <h1>Current User: {{currentUser}}</h1>
-    <h2>{{events}}</h2>
-    <button v-on:click="listmode">LISTMODE</button>
+    <h2>This will be the Listmode</h2>
+    <li v-for="event in shownevents">{{event.name}} von {{event.owner.fields.name}} | {{event.food}} | {{event.time}} | {{event.location}}</li>
+
 
 
 
@@ -27,28 +28,41 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 
-//countup variable
+//events array
 
-var countup = 2;
+var events =[];
 
 export default {
-  name: "Test",
+  name: "listmode",
   components: {
     HelloWorld
   },data: function(){
     return {
       currentUser: getCookie("username"),
-      events: ""
+      shownevents: events
     }
 },methods: {
-  listmode(){
-    this.$router.push("/listmode")
-  }
 
 },
   mounted: function(){
 
     console.log(getCookie("username"));
+
+    window.contentfulClient.getEntries({
+    'content_type': 'event',
+  })
+  .then((entries)=>{
+
+    entries.items.forEach((entry)=>{
+      var newEvent = new event(entry)
+      events.push(newEvent);
+
+
+    })
+  })
+  .catch();
+
+  console.log(events);
 
 
 
@@ -70,6 +84,16 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+class event{
+  constructor(entry){
+    this.food = entry.fields.food
+    this.name = entry.fields.eventTitle
+    this.location = entry.fields.location
+    this.owner = entry.fields.owner
+    this.time = entry.fields.time
+  }
 }
 
 

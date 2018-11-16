@@ -31,7 +31,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 var countup = 2;
 
 export default {
-  name: "Test",
+  name: "homescreen",
   components: {
     HelloWorld
   },data: function(){
