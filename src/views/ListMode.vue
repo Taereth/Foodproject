@@ -27,6 +27,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Helper from "@/helper.js"
 
 //events array
 
@@ -38,7 +39,7 @@ export default {
     HelloWorld
   },data: function(){
     return {
-      currentUser: getCookie("username"),
+      currentUser: Helper.getCookie("username"),
       shownevents: events
     }
 },methods: {
@@ -46,7 +47,7 @@ export default {
 },
   mounted: function(){
 
-    console.log(getCookie("username"));
+    console.log(Helper.getCookie("username"));
 
     window.contentfulClient.getEntries({
     'content_type': 'event',
@@ -69,22 +70,6 @@ export default {
 
   }
 };
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 class event{
   constructor(entry){

@@ -12,7 +12,7 @@
 
 
     <h1>Current User: {{currentUser}}</h1>
-    <button v-on:click="listmode">LISTMODE</button>
+    <button v-on:click="listmode">LISTMODE</button><button v-on:click="mapmode">MAPMODE</button>
 
 
 
@@ -25,6 +25,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Helper from "@/helper.js"
 
 //countup variable
 
@@ -36,39 +37,26 @@ export default {
     HelloWorld
   },data: function(){
     return {
-      currentUser: getCookie("username")
+      currentUser: Helper.getCookie("username")
     }
 },methods: {
   listmode(){
     this.$router.push("/listmode")
+  },
+  mapmode(){
+    this.$router.push("/mapmode")
   }
 
 },
   mounted: function(){
 
-    console.log(getCookie("username"));
+    console.log(Helper.getCookie("username"));
 
 
 
 
   }
 };
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 
 
