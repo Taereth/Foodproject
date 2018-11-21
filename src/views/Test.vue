@@ -18,6 +18,12 @@
       <button v-on:click="countup">Click here to Count Up</button>
     </div>
 
+    <li v-for="event in shownevents" v-if="event.seen"><img :src="event.imageURL"></img>{{event.name}} von {{event.owner.fields.name}} | {{event.food}} | {{event.time}} | {{event.location}}
+      <p> </p>
+      <button>Apply</button>
+      <p> </p>
+    </li>
+
 
 
   </div>
@@ -28,9 +34,11 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Helper from "@/helper.js";
 
 //countup variable
 
+var events = [];
 var countup;
 
 export default {
@@ -43,7 +51,8 @@ export default {
       hovermessage: 'Hovering',
       seen: true,
       hidemessage: 'Hide',
-      numberx: ""
+      numberx: "",
+      shownevents: events
     }
 },methods: {
   hide(){
@@ -66,7 +75,6 @@ export default {
       .then((entry)=>{
         var currentVersion= entry.sys.version;
         currentVersion+=1;
-        console.log(entry.fields.number);
         this.numberx = countup;
         entry.fields.number['en-US']=countup;
         return entry.update();
@@ -87,10 +95,48 @@ export default {
     })
     .catch(console.error);
 
-    
+    window.contentfulClient.getEntries({
+    'content_type': 'event'
+  })
+  .then((entries)=>{
+
+    entries.items.forEach((entry)=>{
+      var newEvent = new event(entry)
+      events.push(newEvent);
+
+
+    })
+  })
+  .catch();
+
+
+
 
 
 
   }
 };
+
+
+class event{
+  constructor(entry){
+    this.food = entry.fields.food
+    this.name = entry.fields.eventTitle
+    this.location = entry.fields.location
+    this.owner = entry.fields.owner
+    this.time = entry.fields.time
+    this.vegetarian = entry.fields.vegetarian
+    this.vegan = entry.fields.vegan
+    this.meat = entry.fields.meat
+    this.seen = true
+
+    if(entry.fields.picture != undefined){
+      this.imageURL = 'https:'+entry.fields.picture.fields.file.url
+    }
+    else{
+      this.imageURL = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+  }
+}
+
 </script>
