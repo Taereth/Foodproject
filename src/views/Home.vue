@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <div id="map"></div>
+    <p>Dont do anything here, get out.</p>
 
 
   </div>

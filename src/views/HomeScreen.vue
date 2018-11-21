@@ -4,15 +4,13 @@
   <div class="test">
 
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/test">Test</router-link> |
-      <router-link to="/login">LogOut</router-link>
+      <router-link to="/">TODO_Events</router-link> |
+      <router-link to="/listmode">List</router-link> |
+      <router-link to="/mapmode">Map</router-link>
     </div>
 
 
     <h1>Current User: {{currentUser}}</h1>
-    <button v-on:click="listmode">LISTMODE</button><button v-on:click="mapmode">MAPMODE</button>
 
 
 
@@ -40,12 +38,6 @@ export default {
       currentUser: Helper.getCookie("username")
     }
 },methods: {
-  listmode(){
-    this.$router.push("/listmode")
-  },
-  mapmode(){
-    this.$router.push("/mapmode")
-  }
 
 },
   mounted: function(){
