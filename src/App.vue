@@ -16,7 +16,7 @@
   color: #2c3e50;
 }
 
-#nav {
+.nav {
   padding: 20px;
   a {
     margin: 0px 10px 0px 10px;
@@ -27,6 +27,19 @@
     }
   }
 }
+
+.settings {
+    display: flex;
+    position: absolute;
+    right: 28px;
+    top: 20px;
+}
+
+h3 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
 </style>
 
 <script>

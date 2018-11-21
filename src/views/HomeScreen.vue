@@ -4,10 +4,10 @@
 <div class="test">
 
   <div class="headbar">
-    <div id="logo">
+    <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
-    <div id="settings">
+    <div class="settings">
       <p> Set </p>
     </div>
   </div>
@@ -30,7 +30,7 @@
    align-items: baseline;
    display: inline-flex;
  }
- #settings{
+ .settings{
    display: flex;
    position: absolute;
    right: 28px;

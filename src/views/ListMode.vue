@@ -1,13 +1,11 @@
-
-
 <template>
 <div class="test">
 
   <div class="headbar">
-    <div id="logo">
+    <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
-    <div id="settings">
+    <div class="settings">
       <p> Set </p>
     </div>
   </div>
@@ -15,7 +13,7 @@
   <div class="headbar">
 
   </div>
-  <div id="nav">
+  <div class="nav">
     <router-link to="/">Events</router-link>
     <router-link to="/listmode">List</router-link>
     <router-link to="/mapmode">Map</router-link>
@@ -131,16 +129,8 @@ li {
     align-items: baseline;
     display: inline-flex;
 }
-#settings {
-    display: flex;
-    position: absolute;
-    right: 28px;
-    top: 20px;
-}
-h3 {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
+
+
 </style>
 
 <!-- <template>

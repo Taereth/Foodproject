@@ -1,36 +1,119 @@
-
-
 <template>
-  <div class="test">
+<div class="test">
 
-    <div id="nav">
-      <router-link to="/">TODO_Events</router-link> |
-      <router-link to="/listmode">List</router-link> |
-      <router-link to="/mapmode">Map</router-link>
+  <div class="headbar">
+    <div class="logo">
+      <h3>STUDENTENFUTTER</h3>
     </div>
-
-
-    <h1>Current User: {{currentUser}}</h1>
-    <h2>This will be the MapMode</h2>
-    <input  type="checkbox" v-model="vegetarian" v-on:change="updateList">Vegetarian</input>
-    <input  type="checkbox" v-model="vegan" v-on:change="updateList">Vegan</input>
-    <input  type="checkbox" v-model="meat" v-on:change="updateList">Meat</input>
-    <div id="map"></div>
-
-
-
-
-
+    <div class="settings">
+      <p> Set </p>
+    </div>
   </div>
 
+  <div class="headbar">
 
+  </div>
+  <div class="nav">
+    <router-link to="/">Events</router-link>
+    <router-link to="/listmode">List</router-link>
+    <router-link to="/mapmode">Map</router-link>
+  </div>
+
+  <div class="ck-button">
+    <label for="vegbox">
+    <input type="checkbox" id="vegbox" v-model="vegetarian" v-on:change="updateList"></input><span>Vegetarian</span>
+    </label>
+  </div>
+
+  <div class="ck-button">
+    <label for="veganbox">
+  <input type="checkbox" id="veganbox" v-model="vegan" v-on:change="updateList"></input><span>Vegan</span>
+  </label>
+  </div>
+
+  <div class="ck-button">
+    <label for="meatbox">
+  <input type="checkbox" id="meatbox" v-model="meat" v-on:change="updateList"></input><span>Meat</span>
+</label>
+  </div>
+
+<div id="map"></div>
+
+</div>
 </template>
 
 <style scoped lang="scss">
+div label input {
+    margin-right: 100px;
+}
+body {
+    font-family: sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+.eventTime {
+    background-color: orange;
+}
+.eventName {
+    background-color: green;
+}
+.eventLoc {
+    background-color: pink;
+}
+.eventDesc {
+    background-color: yellow;
+}
+
+.eventbox {
+    margin: 10px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
+}
+
+.ck-button {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    margin: 4px;
+    background-color: #C0C0C0;
+    color: white;
+    border-radius: 20px;
+    display: inline-flex;
+}
+
+.ck-button label {
+    font-weight: bold;
+    font-size: 15px;
+    float: left;
+    width: auto;
+}
+
+.ck-button label span {
+    text-align: center;
+    padding: 8px 15px;
+    display: block;
+}
+
+.ck-button label input {
+    position: absolute;
+    top: -20px;
+}
+
+.ck-button input:checked + span {
+  border-radius: 30px;
+    background-color: #12DD8E;
+    color: #fff;
+}
+
+.headbar {
+    align-items: baseline;
+    display: inline-flex;
+}
+
 #map {
   height: 80vh;
   width: 80vw;
 }
+
 </style>
 
 
@@ -178,12 +261,16 @@ class event{
   constructor(entry){
     this.food = entry.fields.food
     this.name = entry.fields.eventTitle
+    this.nutrition = entry.fields.nutrition
     this.location = entry.fields.location
     this.owner = entry.fields.owner
     this.time = entry.fields.time
     this.vegetarian = entry.fields.vegetarian
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
+    this.picture = entry.fields.picture
+    console.log(this.picture)
+    this.seen = true
   }
 }
 
