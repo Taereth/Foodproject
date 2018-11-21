@@ -16,6 +16,16 @@
   color: #2c3e50;
 }
 
+img{
+  height: 200px;
+  width: auto;
+}
+
+.flagimg{
+  height: 38px;
+  width: auto;
+}
+
 .nav {
   padding: 20px;
   a {

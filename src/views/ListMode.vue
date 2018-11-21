@@ -5,8 +5,10 @@
     <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
-    <div class="settings">
-      <p> Set </p>
+    <div class="settings" v-for="event in shownevents" v-if="event.seen">
+      <!-- <p>SET</p> -->
+
+      <img :src="event.imageURL3"></img>
     </div>
   </div>
 
@@ -37,11 +39,23 @@
   </div>
 
   <li v-for="event in shownevents" v-if="event.seen">
+
     <div class="eventbox">
-      <!-- <div class="eventPic">
-        {{event.picture}} </div> -->
-    <div class="eventNut">
-      {{event.nutrition}}</div>
+      <img :src="event.imageURL1"></img>
+      <div class="eventFlag"><img class="flagimg" :src="event.imageURL2"></img>
+      </div>
+      <div class="eventNut">
+        {{event.nutrition}}</div>
+
+      <div class="infos">
+        <div class="eventDate">
+          {{event.date}}</div>
+        <div class="eventTime">
+          {{event.time}} </div>
+        <div class="eventDistance">
+          {{event.distance}}</div>
+      </div>
+
       <div class="eventName">
         {{event.name}} </div>
       <!-- {{event.owner.fields.name}} -->
@@ -49,11 +63,9 @@
       <div class="eventDesc">
         {{event.food}}</div>
 
-      <div class="eventTime">
-        {{event.time}} </div>
 
-      <div class="eventLoc">
-        {{event.location}} </div>
+      <!-- <div class="eventLoc">
+        {{event.location}} </div> -->
 
       <button>Apply</button>
     </div>
@@ -74,21 +86,50 @@ body {
 li {
     list-style-type: none;
 }
-.eventTime {
-    background-color: orange;
+.infos{
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+
+}
+.eventPic {
+    position: relative;
+}
+.eventFlag {
+    position: absolute;
+    top: 20px;
+    right: -18px;
+}
+.eventNut {
+    position: absolute;
+    top: 20px;
+    left: 20px;
 }
 .eventName {
-    background-color: green;
-}
-.eventLoc {
-    background-color: pink;
+  padding: 0 20px 10px 20px;
+    font-size: 25px;
+    text-align: left;
+
 }
 .eventDesc {
-    background-color: yellow;
+  padding: 0 20px 0 20px;
+    text-align: left;
+
+}
+.eventDate {
+
+    }
+.eventTime {
+
+    }
+
+.eventDistance {
+
 }
 
 .eventbox {
-    margin: 10px;
+    position: relative;
+    margin: 10px 10px 20px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
 }
 
@@ -120,7 +161,7 @@ li {
 }
 
 .ck-button input:checked + span {
-  border-radius: 30px;
+    border-radius: 30px;
     background-color: #12DD8E;
     color: #fff;
 }
@@ -129,8 +170,6 @@ li {
     align-items: baseline;
     display: inline-flex;
 }
-
-
 </style>
 
 <!-- <template>
@@ -226,15 +265,32 @@ class event {
     this.name = entry.fields.eventTitle
     this.nutrition = entry.fields.nutrition
     this.location = entry.fields.location
+    this.distance = entry.fields.distance
     this.owner = entry.fields.owner
     this.time = entry.fields.time
+    this.date = entry.fields.date
     this.vegetarian = entry.fields.vegetarian
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
-    this.picture = entry.fields.picture
-    console.log(this.picture)
     this.seen = true
 
+    if (entry.fields.picture != undefined) {
+      this.imageURL1 = 'https:' + entry.fields.picture.fields.file.url
+    } else {
+      this.imageURL1 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
+    if (entry.fields.flag != undefined) {
+      this.imageURL2 = 'https:' + entry.fields.flag.fields.file.url
+    } else {
+      this.imageURL2 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
+    if (entry.fields.setIcon != undefined) {
+      this.imageURL3 = 'https:' + entry.fields.setIcon.fields.file.url
+    } else {
+      this.imageURL3 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
   }
 }
 </script>
