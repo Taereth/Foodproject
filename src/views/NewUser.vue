@@ -70,11 +70,14 @@ export default {
 
     entries.items.forEach((entry)=>{
 
-      entry.publish();
+      return entry.publish();
 
     })
+
   })
-  .catch())
+  .then((entries)=>{this.$router.push("/login")})
+  .catch()
+  )
 
   }
 
