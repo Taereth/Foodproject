@@ -11,7 +11,8 @@
     <p>ORIGIN</p>
     <input v-model="neworigininput" placeholder="ORIGIN">
     <p>PROFILE PICTURE</p>
-    <p>TO DO</p>
+    <Draw/>
+
     <button id="signup" v-on:click="register">SIGNUP</button>
   </div>
 
@@ -21,6 +22,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import Draw from "@/components/Draw.vue";
 
 //countup variable
 
@@ -29,7 +31,8 @@ var countup;
 export default {
   name: "newuser",
   components: {
-    HelloWorld
+    HelloWorld,
+    Draw
   },data: function(){
     return {
       newusernameinput: "",
