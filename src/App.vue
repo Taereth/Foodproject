@@ -9,21 +9,21 @@
 @import url('https://rsms.me/inter/inter-ui.css');
 #app {
   font-family: "Inter UI", sans-serif;
-  font-style: normal;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-
 #nav {
-  padding: 30px;
+  padding: 20px;
   a {
-    font-weight: lighter;
+    margin: 0px 10px 0px 10px;
     color: #2c3e50;
+    text-decoration: none;
     &.router-link-exact-active {
-      color: #42b983;
+      border-bottom: 3px solid red;
     }
   }
 }
