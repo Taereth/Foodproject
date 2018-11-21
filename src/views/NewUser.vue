@@ -11,7 +11,9 @@
     <p>ORIGIN</p>
     <input v-model="neworigininput" placeholder="ORIGIN">
     <p>PROFILE PICTURE</p>
-    <Draw/>
+    <Draw v-on:blobready = "blobready" ref="Portrait"/>
+    <button v-on:click = "saveit">SAVE</button>
+    <img :src="imgsrc"></img>
 
     <button id="signup" v-on:click="register">SIGNUP</button>
   </div>
@@ -38,7 +40,9 @@ export default {
       newusernameinput: "",
       newpasswordinput: "",
       newageinput: "",
-      neworigininput: ""
+      neworigininput: "",
+      newuserimage: "",
+      imgsrc: ""
 
     }
 },methods: {
@@ -58,7 +62,8 @@ export default {
         },
         age:{
           'en-US': this.newageinput
-        }
+        },
+
       }
     })
 
@@ -82,10 +87,19 @@ export default {
   .catch()
   )
 
-  }
+},
+saveit(){
+  this.$refs.Portrait.getPicture();
+
+},
+blobready(){
+  console.log(this.$refs.Portrait.blob);
+  this.imgsrc = URL.createObjectURL(this.$refs.Portrait.blob);
+}
 
 },
   mounted: function(){
+
 
 
 
