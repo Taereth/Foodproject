@@ -122,6 +122,19 @@ function initMap(){
   this.map = new google.maps.Map(element, options);
   mapref = this.map;
 
+  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    var icons = {
+      spain: {
+        icon: iconBase + 'flag-map-spain.svg'
+      },
+      japan: {
+        icon: iconBase + 'flag-map-spain.svg'
+      },
+      india: {
+        icon: iconBase + 'flag-map-spain.svg'
+      }
+    };
+
 }
 
 function initMarkers(){
@@ -139,6 +152,7 @@ function initMarkers(){
 
     var marker = new google.maps.Marker({
       position: LatLng,
+      type: 'spain',
       map: mapref,
       title: eventname
     });
