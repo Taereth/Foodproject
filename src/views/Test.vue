@@ -103,6 +103,7 @@ export default {
     entries.items.forEach((entry)=>{
       var newEvent = new event(entry)
       events.push(newEvent);
+      console.log("bla");
 
 
     })
