@@ -6,17 +6,21 @@
 </template>
 
 <style lang="scss">
+@import url('https://rsms.me/inter/inter-ui.css');
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "Inter UI", sans-serif;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
+
+
 #nav {
   padding: 30px;
   a {
-    font-weight: bold;
+    font-weight: lighter;
     color: #2c3e50;
     &.router-link-exact-active {
       color: #42b983;
@@ -28,7 +32,7 @@
 <script>
 
 export default {
-  
+
   mounted: function(){
 
     this.$router.push("/login")

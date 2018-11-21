@@ -1,24 +1,52 @@
 
 
 <template>
-  <div class="test">
+<div class="test">
 
-    <div id="nav">
-      <router-link to="/">TODO_Events</router-link> |
-      <router-link to="/listmode">List</router-link> |
-      <router-link to="/mapmode">Map</router-link>
+  <div class="tryout">
+    <div id="logo">
+      <h3>STUDENTENFUTTER</h3>
     </div>
-
-
-    <h1>Current User: {{currentUser}}</h1>
-
-
-
-
+    <div id="settings">
+      <p> Set </p>
+    </div>
   </div>
 
+  <div class="tryout">
 
+  </div> <div id="nav">
+    <router-link to="/">TODO_Events</router-link> |
+    <router-link to="/listmode">List</router-link> |
+    <router-link to="/mapmode">Map</router-link>
+  </div>
+</div>
+
+</div>
 </template>
+
+<style scoped lang="scss">
+ .tryout{
+   align-items: baseline;
+   display: inline-flex;
+ }
+ #settings{
+   display: flex;
+   position: absolute;
+   right: 28px;
+   top: 20px;
+ }
+ h3{
+   font-weight: lighter;
+   font-style: normal;
+   font-size: 1.5em;
+ }
+ h4{
+   color: grey;
+   font-weight: lighter;
+   font-style: normal;
+   font-size: 2em;
+ }
+</style>
 
 <script>
 // @ is an alias to /src
@@ -33,14 +61,16 @@ export default {
   name: "homescreen",
   components: {
     HelloWorld
-  },data: function(){
+  },
+  data: function() {
     return {
       currentUser: Helper.getCookie("username")
     }
-},methods: {
+  },
+  methods: {
 
-},
-  mounted: function(){
+  },
+  mounted: function() {
 
     console.log(Helper.getCookie("username"));
 
@@ -49,7 +79,4 @@ export default {
 
   }
 };
-
-
-
 </script>
