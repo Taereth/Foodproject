@@ -3,7 +3,7 @@
 <template>
 <div class="test">
 
-  <div class="tryout">
+  <div class="headbar">
     <div id="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
@@ -12,11 +12,11 @@
     </div>
   </div>
 
-  <div class="tryout">
+  <div class="headbar">
 
   </div> <div id="nav">
-    <router-link to="/">TODO_Events</router-link> |
-    <router-link to="/listmode">List</router-link> |
+    <router-link to="/">Events</router-link>
+    <router-link to="/listmode"><b>List</b></router-link>
     <router-link to="/mapmode">Map</router-link>
   </div>
 </div>
@@ -25,7 +25,8 @@
 </template>
 
 <style scoped lang="scss">
- .tryout{
+
+ .headbar{
    align-items: baseline;
    display: inline-flex;
  }
@@ -39,12 +40,6 @@
    font-weight: lighter;
    font-style: normal;
    font-size: 1.5em;
- }
- h4{
-   color: grey;
-   font-weight: lighter;
-   font-style: normal;
-   font-size: 2em;
  }
 </style>
 

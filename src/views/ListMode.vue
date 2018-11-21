@@ -1,36 +1,165 @@
 
 
 <template>
+<div class="test">
+
+  <div class="headbar">
+    <div id="logo">
+      <h3>STUDENTENFUTTER</h3>
+    </div>
+    <div id="settings">
+      <p> Set </p>
+    </div>
+  </div>
+
+  <div class="headbar">
+
+  </div>
+  <div id="nav">
+    <router-link to="/">Events</router-link>
+    <router-link to="/listmode">List</router-link>
+    <router-link to="/mapmode">Map</router-link>
+  </div>
+
+  <div class="ck-button">
+    <label for="vegbox">
+    <input type="checkbox" id="vegbox" v-model="vegetarian" v-on:change="updateList"></input><span>Vegetarian</span>
+    </label>
+  </div>
+
+  <div class="ck-button">
+    <label for="veganbox">
+  <input type="checkbox" id="veganbox" v-model="vegan" v-on:change="updateList"></input><span>Vegan</span>
+  </label>
+  </div>
+  <div class="ck-button">
+    <label for="meatbox">
+  <input type="checkbox" id="meatbox" v-model="meat" v-on:change="updateList"></input><span>Meat</span>
+</label>
+  </div>
+
+  <li v-for="event in shownevents" v-if="event.seen">
+    <div class="eventbox">
+      <!-- <div class="eventPic">
+        {{event.picture}} </div> -->
+    <div class="eventNut">
+      {{event.nutrition}}</div>
+      <div class="eventName">
+        {{event.name}} </div>
+      <!-- {{event.owner.fields.name}} -->
+
+      <div class="eventDesc">
+        {{event.food}}</div>
+
+      <div class="eventTime">
+        {{event.time}} </div>
+
+      <div class="eventLoc">
+        {{event.location}} </div>
+
+      <button>Apply</button>
+    </div>
+  </li>
+
+
+</div>
+</template>
+
+<style scoped lang="scss">
+div label input {
+    margin-right: 100px;
+}
+body {
+    font-family: sans-serif;
+}
+
+li {
+    list-style-type: none;
+}
+.eventTime {
+    background-color: orange;
+}
+.eventName {
+    background-color: green;
+}
+.eventLoc {
+    background-color: pink;
+}
+.eventDesc {
+    background-color: yellow;
+}
+
+.eventbox {
+    margin: 10px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
+}
+
+.ck-button {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    margin: 4px;
+    background-color: #C0C0C0;
+    color: white;
+    border-radius: 20px;
+    display: inline-flex;
+}
+
+.ck-button label {
+    font-weight: bold;
+    font-size: 15px;
+    float: left;
+    width: auto;
+}
+
+.ck-button label span {
+    text-align: center;
+    padding: 8px 15px;
+    display: block;
+}
+
+.ck-button label input {
+    position: absolute;
+    top: -20px;
+}
+
+.ck-button input:checked + span {
+  border-radius: 30px;
+    background-color: #12DD8E;
+    color: #fff;
+}
+
+.headbar {
+    align-items: baseline;
+    display: inline-flex;
+}
+#settings {
+    display: flex;
+    position: absolute;
+    right: 28px;
+    top: 20px;
+}
+h3 {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+</style>
+
+<!-- <template>
   <div class="test">
 
     <div id="nav">
       <router-link to="/">TODO_Events</router-link> |
       <router-link to="/listmode">List</router-link> |
       <router-link to="/mapmode">Map</router-link>
-    </div>
-
-
-    <h1>Current User: {{currentUser}}</h1>
-    <h2>This will be the Listmode</h2>
-    <h3>Sort by</h3>
-    <input  type="checkbox" v-model="vegetarian" v-on:change="updateList">Vegetarian</input>
-    <input  type="checkbox" v-model="vegan" v-on:change="updateList">Vegan</input>
-    <input  type="checkbox" v-model="meat" v-on:change="updateList">Meat</input>
-    <p>{{vegetarian}}  {{vegan}}  {{meat}}</p>
-    <li v-for="event in shownevents" v-if="event.seen">{{event.name}} von {{event.owner.fields.name}} | {{event.food}} | {{event.time}} | {{event.location}}
-      <p> </p>
-      <button>Apply</button>
-      <p> </p>
-    </li></button>
+    </div> -->
 
 
 
 
 
-  </div>
 
 
-</template>
+
+
 
 <script>
 // @ is an alias to /src
@@ -39,13 +168,14 @@ import Helper from "@/helper.js"
 
 //events array
 
-var events =[];
+var events = [];
 
 export default {
   name: "listmode",
   components: {
     HelloWorld
-  },data: function(){
+  },
+  data: function() {
     return {
       currentUser: Helper.getCookie("username"),
       shownevents: events,
@@ -53,26 +183,24 @@ export default {
       vegan: true,
       meat: true
     }
-},methods: {
-  updateList(){
-         for(var i=0;i<events.length;i++){
-           if(this.vegetarian == true && events[i].vegetarian == true){
-             events[i].seen = true;
-           }
-           else if(this.vegan == true && events[i].vegan == true){
-             events[i].seen = true;
-           }
-           else if(this.meat == true && events[i].meat == true){
-             events[i].seen = true;
-           }
-           else{
-             events[i].seen = false;
-           }
-         }
-  }
+  },
+  methods: {
+    updateList() {
+      for (var i = 0; i < events.length; i++) {
+        if (this.vegetarian == true && events[i].vegetarian == true) {
+          events[i].seen = true;
+        } else if (this.vegan == true && events[i].vegan == true) {
+          events[i].seen = true;
+        } else if (this.meat == true && events[i].meat == true) {
+          events[i].seen = true;
+        } else {
+          events[i].seen = false;
+        }
+      }
+    }
 
-},
-  mounted: function(){
+  },
+  mounted: function() {
 
     console.log(this.vegetarian);
     console.log(this.vegan);
@@ -81,20 +209,20 @@ export default {
 
 
     window.contentfulClient.getEntries({
-    'content_type': 'event'
-  })
-  .then((entries)=>{
+        'content_type': 'event'
+      })
+      .then((entries) => {
 
-    entries.items.forEach((entry)=>{
-      var newEvent = new event(entry)
-      events.push(newEvent);
+        entries.items.forEach((entry) => {
+          var newEvent = new event(entry)
+          events.push(newEvent);
 
 
-    })
-  })
-  .catch();
+        })
+      })
+      .catch();
 
-  console.log(events);
+    console.log(events);
 
 
 
@@ -102,20 +230,21 @@ export default {
   }
 };
 
-class event{
-  constructor(entry){
+class event {
+  constructor(entry) {
     this.food = entry.fields.food
     this.name = entry.fields.eventTitle
+    this.nutrition = entry.fields.nutrition
     this.location = entry.fields.location
     this.owner = entry.fields.owner
     this.time = entry.fields.time
     this.vegetarian = entry.fields.vegetarian
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
+    this.picture = entry.fields.picture
+    console.log(this.picture)
     this.seen = true
+
   }
 }
-
-
-
 </script>
