@@ -7,6 +7,14 @@
 
 <style>
 
+.Draw {
+    margin:auto;
+    width:200px;
+    border-radius: 10%;
+    border-style: solid;
+    border-width:5px;
+
+}
 </style>
 
 <script>
