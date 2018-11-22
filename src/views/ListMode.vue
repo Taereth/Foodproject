@@ -6,6 +6,9 @@
   <div class="sticky">
 
     <div class="headbar">
+    <div class="UserPictureContainer">
+      <img class="UserPicture" height="40px" :src="currentUserPicture"></img>
+    </div>
       <div class="logo">
         <h3>STUDENTENFUTTER</h3>
       </div>
@@ -23,7 +26,10 @@
     </div>
   </div>
 
+
+
   <div class="listcontent">
+
 
 
     <div class="ck-button">
@@ -354,7 +360,8 @@ export default {
       showPopup: false,
       vegetarian: true,
       vegan: true,
-      meat: true
+      meat: true,
+      currentUserPicture: ""
     }
   },
   methods: {
@@ -382,10 +389,8 @@ export default {
   },
   mounted: function() {
 
-    console.log(this.vegetarian);
-    console.log(this.vegan);
-    console.log(this.meat);
-
+    getUserPicture(Helper.getCookie("username"))
+    .then((result)=>{this.currentUserPicture=result})
 
 
     window.contentfulClient.getEntries({
@@ -424,6 +429,14 @@ class event {
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
     this.seen = true
+    this.ownerpicture = this.owner.fields.profilepicture;
+
+    if (this.owner.fields.profilepicture != undefined) {
+      this.ownerpicture = 'https:' + this.owner.fields.profilepicture.fields.file.url
+    } else {
+      this.ownerpicture = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
 
     if (entry.fields.picture != undefined) {
       this.imageURL1 = 'https:' + entry.fields.picture.fields.file.url
@@ -448,5 +461,17 @@ class event {
       this.imageURL4 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
     }
   }
+}
+
+function getUserPicture(User){
+
+  return window.contentfulClient.getEntries({
+  'content_type': 'user',
+  'fields.name': User
+})
+.then((entry)=>{
+  console.log('https:' + entry.items[0].fields.profilepicture.fields.file.url);
+  return 'https:' + entry.items[0].fields.profilepicture.fields.file.url
+})
 }
 </script>

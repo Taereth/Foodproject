@@ -64,6 +64,18 @@ body {
     right: 28px;
     top: 16px;
 }
+.UserPictureContainer {
+    display: flex;
+    position: absolute;
+    left: 28px;
+    top: 16px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width:5px;
+    border-color:black;
+}
+
+
 
 h3 {
     margin-bottom: 10px;
