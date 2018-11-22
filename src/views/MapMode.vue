@@ -213,18 +213,6 @@ export default {
   }
 };
 
-function initMap(){
-
-  const element = document.getElementById("map")
-  const options = {
-      zoom: 14,
-      center: new google.maps.LatLng(47.071467, 8.277621)
-  }
-  this.map = new google.maps.Map(element, options);
-  mapref = this.map;
-
-}
-
 function initMarkers(){
   for(var i = 0; i<events.length; i++){
 
