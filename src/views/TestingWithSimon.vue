@@ -103,7 +103,7 @@ export default {
 
     })
 
-    initMarkers();
+    //initMarkers();
 
 
 
@@ -112,32 +112,12 @@ export default {
   }
 };
 
-function initMap(){
-
-  const element = document.getElementById("map")
-  const options = {
-      zoom: 14,
-      center: new google.maps.LatLng(47.071467, 8.277621)
-  }
-  this.map = new google.maps.Map(element, options);
-  mapref = this.map;
-
-  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-    var icons = {
-      spain: {
-        icon: iconBase + :src="event.imageURL5"
-      },
-      japan: {
-        icon: iconBase + 'flag-map-spain.svg'
-      },
-      india: {
-        icon: iconBase + 'flag-map-spain.svg'
-      }
-    };
-
-}
 
 function initMarkers(){
+
+  console.log("Markers");
+
+
   for(var i = 0; i<events.length; i++){
 
 

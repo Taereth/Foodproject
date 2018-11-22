@@ -226,6 +226,7 @@ function initMarkers(){
 
     var mylat = eventloc.lat;
     var mylng = eventloc.lon;
+    var flag = events[i].imageURL5;
 
     var LatLng = {lat: mylat, lng: mylng};
 
@@ -233,7 +234,9 @@ function initMarkers(){
     var marker = new google.maps.Marker({
       position: LatLng,
       map: mapref,
-      title: eventname
+      title: eventname,
+      icon: flag
+
     });
 
 
@@ -248,7 +251,7 @@ function initMarkers(){
                 content: " "
                 });
 
-    console.log(marker);
+  
     bindWindow(marker,mapref,infowindow,contentString);
 
     markers.push(marker);
@@ -281,6 +284,15 @@ class event{
     this.picture = entry.fields.picture
     console.log(this.picture)
     this.seen = true
+
+    if (entry.fields.mapPin != undefined) {
+      this.imageURL5 = 'https:' + entry.fields.mapPin.fields.file.url
+    } else {
+      this.imageURL5 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
+
+
   }
 }
 
