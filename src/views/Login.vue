@@ -32,6 +32,7 @@
 
 </template>
 
+<<<<<<< HEAD
 <style scoped lang="scss">
 .userlogin {
   justify-content: center;
@@ -65,6 +66,13 @@ h6 {
 }
 </style>
 
+=======
+<style>
+  
+</style>
+
+
+>>>>>>> 0d989445c3fd519afafd0fbf03683d64516c912e
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";

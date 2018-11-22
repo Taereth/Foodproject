@@ -3,20 +3,44 @@
 <template>
   <div class="test">
     <p>USERNAME</p>
-    <input v-model="newusernameinput" placeholder="USERNAME">
+    <input class="input" v-model="newusernameinput" placeholder="USERNAME">
     <p>PASSWORD</p>
-    <input v-model="newpasswordinput" placeholder="PASSWORD">
+    <input class="input" v-model="newpasswordinput" placeholder="PASSWORD">
     <p>AGE</p>
-    <input v-model.number="newageinput" placeholder="AGE">
+    <input class="input" v-model.number="newageinput" placeholder="AGE">
     <p>ORIGIN</p>
-    <input v-model="neworigininput" placeholder="ORIGIN">
+    <input class="input" v-model="neworigininput" placeholder="ORIGIN">
     <p>PROFILE PICTURE</p>
     <Draw v-on:blobready = "blobready" ref="Portrait"/>
-    <button id="signup" v-on:click="saveit">SIGNUP</button>
+    <button class="ck-button" id="signup" v-on:click="saveit"><span>SIGNUP</span></button>
   </div>
 
 
 </template>
+
+<style>
+
+.input{
+  border-color:black;
+}
+
+.ck-button {
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    margin: 4px;
+    background-color: orange;
+    color: #fff;
+    border-color: black;
+    border-radius: 20px;
+    display: inline-flex;
+    margin-top: 6px;
+}
+.ck-button span {
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+</style>
 
 <script>
 // @ is an alias to /src

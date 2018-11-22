@@ -3,7 +3,9 @@
 
 
   <div class="headbar">
-    <img :src="currentUserPicture"></img>
+    <div class="UserPictureContainer">
+      <img class="UserPicture" height="40px" :src="currentUserPicture"></img>
+    </div>
     <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>

@@ -13,7 +13,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
 body {
@@ -43,9 +43,9 @@ body {
 .nav {
   padding: 15px 0 15px 0;
   a {
+    color: black;
     margin: 0px 10px 0px 10px;
     padding-bottom:5px;
-    color: #2c3e50;
     text-decoration: none;
     &.router-link-exact-active {
       border-bottom: 3px solid red;
@@ -64,6 +64,18 @@ body {
     right: 28px;
     top: 16px;
 }
+.UserPictureContainer {
+    display: flex;
+    position: absolute;
+    left: 28px;
+    top: 16px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width:5px;
+    border-color:black;
+}
+
+
 
 h3 {
     margin-bottom: 10px;
