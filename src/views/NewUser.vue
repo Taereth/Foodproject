@@ -13,9 +13,9 @@
     <p>PROFILE PICTURE</p>
     <Draw v-on:blobready = "blobready" ref="Portrait"/>
     <button v-on:click = "saveit">SAVE</button>
-    <img :src="imgsrc"></img>
 
     <button id="signup" v-on:click="register">SIGNUP</button>
+    <button id="asset" v-on:click="createAsset">TESTCREATEASSET</button>
   </div>
 
 
@@ -46,10 +46,95 @@ export default {
 
     }
 },methods: {
+
+  createAsset: function(blob) {
+
+
+     let assetreference;
+     let spaceref = null;
+     console.log("uploading");
+     let contentType = "image/png";
+     window.contentfulClientUpdate
+       .getSpace("nyazvzij5ixn")
+       .then(space => {
+         spaceref = space;
+         return space.getEnvironment("master");
+       })
+       .then(environment => environment.createUpload({ file: blob }))
+       .then(upload => {
+         console.log("creating asset...");
+         return spaceref.createAsset({
+           fields: {
+             title: {
+               "en-US": "test"
+             },
+             file: {
+               "en-US": {
+                 fileName: this.newusernameinput + "_profile.png",
+                 contentType: contentType,
+                 uploadFrom: {
+                   sys: {
+                     type: "Link",
+                     linkType: "Upload",
+                     id: upload.sys.id
+                   }
+                 }
+               }
+             }
+           }
+         });
+       })
+       .then(asset => {
+         console.log("processing...");
+         return asset.processForLocale("en-US", {
+           processingCheckWait: 2000
+         });
+       })
+       .then(asset => {
+         console.log("publishing...");
+         this.assetreference = asset;
+         console.log(this.assetreference);
+         return asset.publish();
+       })
+       .then(asset => {
+         console.log(asset);
+         return asset;
+       })
+       .catch(err => {
+         console.log(err);
+       });
+   },
+
+
   register(){
 
+
+    let spacereference;
+    let assetreference;
     window.contentfulClientUpdate.getSpace('nyazvzij5ixn')
-    .then((space)=> {space.createEntry('user', {
+    .then((space)=> {spacereference = space;})
+    .then(()=>{return spacereference.createAsset({
+      fields: {
+        title: {
+          'en-US': this.newusernameinput + '_profile.png'
+        },
+        description: {
+          'en-US': "No Description."
+        },
+        file: {
+          'en-US': {
+            contentType: 'image/png',
+            fileName: this.newusernameinput + '_profile.png',
+            upload: this.imgsrc
+          }
+        }
+      }
+    })
+
+  })
+  .then(asset => asset.processForAllLocales())
+  .then(asset => {asset.publish(); assetreference=asset;})
+  .then(()=> {return spacereference.createEntry('user', {
       fields: {
         name:{
           'en-US': this.newusernameinput
@@ -63,29 +148,24 @@ export default {
         age:{
           'en-US': this.newageinput
         },
+        profilepicture:{
+          'en-US': {
+            'sys': {
+              'id': assetreference.sys.id,
+              'linkType': 'Asset',
+              'type': 'Link'
+            }
+          }
+        }
 
       }
     })
 
   }
     )
-    window.contentfulClientUpdate.getSpace('nyazvzij5ixn')
-    .then((space)=>space.getEntries({
-    'content_type': 'user',
-    'fields.name': this.newusernameinput
-  })
-  .then((entries)=>{
+    .then((entry)=>{return entry.update()})
+    .then((entry)=>{return entry.publish()})
 
-    entries.items.forEach((entry)=>{
-
-      return entry.publish();
-
-    })
-
-  })
-  .then((entries)=>{this.$router.push("/login")})
-  .catch()
-  )
 
 },
 saveit(){
@@ -93,16 +173,16 @@ saveit(){
 
 },
 blobready(){
-  console.log(this.$refs.Portrait.blob);
-  this.imgsrc = URL.createObjectURL(this.$refs.Portrait.blob);
+  this.$refs.Portrait.blob.lastModifiedDate = new Date();
+  this.$refs.Portrait.blob.name = "tempname.png";
+  this.imgsrc = this.$refs.Portrait.blob
+  this.createAsset(this.imgsrc)
+
 }
+
 
 },
   mounted: function(){
-
-
-
-
 
   }
 };

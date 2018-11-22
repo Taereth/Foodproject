@@ -3,7 +3,14 @@
       <div ref="p5"></div>
   </div>
 </template>
+
+
+<style>
+
+</style>
+
 <script>
+
 
 var p = false;
 var img;
