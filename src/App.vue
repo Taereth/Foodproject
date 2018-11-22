@@ -72,7 +72,7 @@ body {
     border-radius: 50%;
     border-style: solid;
     border-width:5px;
-    border-color:#12DD8E;
+    border-color:black;
 }
 
 
