@@ -32,11 +32,13 @@
 
 </template>
 
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 <style scoped lang="scss">
+
 .userlogin {
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 40%;
+  margin-bottom: 60%;
 }
 h6 {
   font-size: 10px;
@@ -58,21 +60,27 @@ h6 {
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
   margin: 4px;
   background-color: #f1f1f1;
-  color: white;
+  color: black;
   border-radius: 20px;
   display: inline-flex;
-  padding: 8px 15px 8px 15px;
+  padding: 8px 12px 8px 12px;
   border-style: none;
+  margin: 0 0 25px 0;
+
 }
+
+p {
+  margin:5px 0 10px 0;
+}
+
+
+
+
 </style>
 
-=======
-<style>
-  
-</style>
 
 
->>>>>>> 0d989445c3fd519afafd0fbf03683d64516c912e
+<!-- >>>>>>> 0d989445c3fd519afafd0fbf03683d64516c912e -->
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";

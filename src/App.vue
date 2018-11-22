@@ -20,6 +20,14 @@ body {
   margin: 0;
 }
 
+textarea:focus, input:focus {
+  outline:none;
+}
+
+*focus {
+  outline:none;
+}
+
 .sticky {
   width: 100%;
   background-color: white;
