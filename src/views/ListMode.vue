@@ -1,6 +1,8 @@
 <template>
 <div class="test">
 
+
+
   <div class="sticky">
 
     <div class="headbar">
@@ -8,7 +10,6 @@
         <h3>STUDENTENFUTTER</h3>
       </div>
       <div class="settings">
-        <!-- <p>SET</p> -->
 
         <img src="../assets/settings.svg" height="20px"></img>
       </div>
@@ -42,9 +43,10 @@
 </label>
     </div>
 
+
     <li v-for="event in shownevents" v-if="event.seen">
 
-      <div class="eventbox">
+      <div class="eventbox" id="event.name" v-on:click="selectEvent(event)">
         <img class="foodimage" :src="event.imageURL1"></img>
         <div class="eventFlag"><img class="flagimg" :src="event.imageURL2"></img>
         </div>
@@ -65,17 +67,45 @@
           {{event.name}} </div>
         <!-- {{event.owner.fields.name}} -->
 
-        <div class="eventDesc">
-          {{event.food}}</div>
+        <!-- <div class="eventDesc">
+          {{event.food}}</div> -->
 
 
         <!-- <div class="eventLoc">
         {{event.location}} </div> -->
 
-        <button>Apply</button>
       </div>
     </li>
 
+  </div>
+  <div v-if="showPopup">
+    <div class="modal">
+      <div class="eventboxpopup" >
+        <img class="foodimage" :src="currentEvent.imageURL1"></img>
+        <div class="eventFlag">
+          <img class="flagimg" :src="currentEvent.imageURL2"></img>
+        </div>
+        <div class="eventNut">
+          <img :src="currentEvent.imageURL4"></img>{{currentEvent.nutrition}}
+        </div>
+
+        <div class="infos">
+          <div class="eventDate">{{currentEvent.date}}</div>
+          <div class="eventTime">{{currentEvent.time}} </div>
+          <div class="eventDistance">{{currentEvent.distance}}</div>
+        </div>
+
+        <div class="eventName">{{currentEvent.name}}</div>
+        <div class="eventDesc">{{currentEvent.food}}</div>
+
+        <div class="controlbuttons">
+          <button class="buttonapply">Apply</button>
+          <button @click="closePopup" class="buttonclose">Back</button>
+        </div>
+
+        <div class="detailmap" id="map"></div>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -95,7 +125,7 @@ li {
 .listcontent {
     z-index: -1;
     padding-top: 120px;
-    margin: 0 10px;
+    margin: 0;
 }
 .infos {
     padding: 20px;
@@ -108,7 +138,7 @@ li {
 }
 .eventFlag {
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: -18px;
 }
 .eventNut {
@@ -116,6 +146,12 @@ li {
     top: 20px;
     left: 20px;
 }
+.modal .eventNut {
+  img {
+      margin-right: 4px;
+    }
+}
+
 .eventName {
     padding: 0 20px 10px;
     font-size: 25px;
@@ -125,7 +161,8 @@ li {
 .eventDesc {
     padding: 0 20px;
     text-align: left;
-
+    color: #7c7c7c;
+    font-weight: 700;
 }
 .eventDate {
     position: relative;
@@ -172,12 +209,11 @@ li {
 }
 .eventbox {
     position: relative;
-    margin: 10px 10px 20px;
+    margin: 10px 20px 10px 20px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
 }
 .ck-button span {
     position: relative;
-    // margin-left: 10px;
 }
 
 .ck-button {
@@ -191,7 +227,6 @@ li {
 
 .ck-button input:checked + span {
     border-radius: 20px;
-    // margin-left: 10px;
     background-color: #12DD8E;
     color: #fff;
 }
@@ -233,17 +268,50 @@ li {
     top: -20px;
 }
 
-// .ck-button input:checked + span {
-//     border-radius: 30px;
-//     margin-left: 10px;
-//     background-color: #12DD8E;
-//     color: #fff;
-// }
 
 .headbar {
     align-items: baseline;
     display: inline-flex;
 }
+
+
+/* Popup */
+
+.modal {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    background-color:rgba(0,0,0,0.4);
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.eventboxpopup {
+  background-color:white;
+  width: auto;
+  z-index: 2;
+  position: relative;
+  margin: 20px 20px 10px 20px;
+}
+
+.controlbuttons {
+  justify-content: flex-start;
+  margin: 20px 10px;
+}
+
+.buttonapply { 
+  background-color: #12DD8E; 
+}
+
+.buttonclose {
+  background-color: #C0C0C0;
+}
+
+.detailmap{
+  background-color: black;
+}
+
 </style>
 
 <!-- <template>
@@ -282,6 +350,8 @@ export default {
     return {
       currentUser: Helper.getCookie("username"),
       shownevents: events,
+      currentEvent: null,
+      showPopup: false,
       vegetarian: true,
       vegan: true,
       meat: true
@@ -300,6 +370,13 @@ export default {
           events[i].seen = false;
         }
       }
+    },
+    selectEvent: function(event) {
+      this.currentEvent = event;
+      this.showPopup = true;
+    },
+    closePopup: function(event) {
+      this.showPopup = false;
     }
 
   },
