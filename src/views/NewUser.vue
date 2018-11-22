@@ -2,27 +2,39 @@
 
 <template>
   <div class="test">
-    <p>USERNAME</p>
-    <input class="input" v-model="newusernameinput" placeholder="USERNAME">
-    <p>PASSWORD</p>
-    <input class="input" v-model="newpasswordinput" placeholder="PASSWORD">
-    <p>AGE</p>
-    <input class="input" v-model.number="newageinput" placeholder="AGE">
-    <p>ORIGIN</p>
-    <input class="input" v-model="neworigininput" placeholder="ORIGIN">
-    <p>PROFILE PICTURE</p>
-    <Draw v-on:blobready = "blobready" ref="Portrait"/>
-    <button class="ck-button" id="signup" v-on:click="saveit"><span>SIGNUP</span></button>
+    <div class="headbar">
+
+      <div class="logo">
+        <h3>STUDENTENFUTTER</h3>
+      </div>
+      <div class="settings">
+        <!-- <p>SET</p> -->
+
+        <img src="../assets/settings.svg" height="20px"></img>
+      </div>
+    </div>
+
+    <p>Username</p>
+    <input class="fillin" v-model="newusernameinput" placeholder="USERNAME">
+    <p>Password</p>
+    <input class="fillin" v-model="newpasswordinput" placeholder="PASSWORD">
+    <p>Age</p>
+    <input class="fillin" v-model.number="newageinput" placeholder="AGE">
+    <p>Origin</p>
+    <input class="fillin" v-model="neworigininput" placeholder="ORIGIN">
+    <p>Draw your Profile Picture</p>
+    <Draw v-on:blobready = "blobready" ref="Portrait" class="drawWindow"/>
+    <button class="loginbtn" id="signup" v-on:click="saveit"><span>SIGN UP</span></button>
   </div>
 
 
 </template>
 
 <style>
-
-.input{
-  border-color:black;
+.headbar{
+  margin-bottom: 20px;
 }
+
 
 .ck-button {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
@@ -39,6 +51,42 @@
     font-weight: bold;
     font-size: 15px;
 }
+
+.drawWindow {
+  border-width: 1px;
+  margin-bottom: 10px;
+}
+
+.loginbtn {
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  margin: 4px;
+  background-color: #12DD8E;
+  color: white;
+  border-radius: 20px;
+  display: inline-flex;
+  text-align: center;
+  padding: 8px 15px 8px 15px;
+  font-weight: bold;
+}
+
+.fillin {
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.05);
+  margin: 4px;
+  background-color: #f1f1f1;
+  color: black;
+  border-radius: 20px;
+  display: inline-flex;
+  padding: 8px 15px 8px 15px;
+  border-style: none;
+  margin: 0 0 25px 0;
+
+}
+
+p {
+  font-size: 14px;
+  margin:5px 0 10px 0;
+}
+
 
 </style>
 
