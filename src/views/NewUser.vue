@@ -12,10 +12,7 @@
     <input v-model="neworigininput" placeholder="ORIGIN">
     <p>PROFILE PICTURE</p>
     <Draw v-on:blobready = "blobready" ref="Portrait"/>
-    <button v-on:click = "saveit">SAVE</button>
-
-    <button id="signup" v-on:click="register">SIGNUP</button>
-    <button id="asset" v-on:click="createAsset">TESTCREATEASSET</button>
+    <button id="signup" v-on:click="saveit">SIGNUP</button>
   </div>
 
 
@@ -66,7 +63,7 @@ export default {
          return spaceref.createAsset({
            fields: {
              title: {
-               "en-US": "test"
+               "en-US": this.newusernameinput + "_profile.png"
              },
              file: {
                "en-US": {
@@ -100,74 +97,41 @@ export default {
          console.log(asset);
          return asset;
        })
+       .then((asset)=>{return spaceref.createEntry('user', {
+           fields: {
+             name:{
+               'en-US': this.newusernameinput
+             },
+             origin:{
+               'en-US': this.neworigininput
+             },
+             passwort:{
+               'en-US': this.neworigininput
+             },
+             age:{
+               'en-US': this.newageinput
+             },
+             profilepicture:{
+               'en-US': {
+                 'sys': {
+                   'id': asset.sys.id,
+                   'linkType': 'Asset',
+                   'type': 'Link'
+                 }
+               }
+             }
+
+           }
+         })
+
+       })
+       .then((entry)=>{return entry.update()})
+       .then((entry)=>{return entry.publish()})
+       .then(()=>{this.$router.push("/login")})
        .catch(err => {
          console.log(err);
        });
    },
-
-
-  register(){
-
-
-    let spacereference;
-    let assetreference;
-    window.contentfulClientUpdate.getSpace('nyazvzij5ixn')
-    .then((space)=> {spacereference = space;})
-    .then(()=>{return spacereference.createAsset({
-      fields: {
-        title: {
-          'en-US': this.newusernameinput + '_profile.png'
-        },
-        description: {
-          'en-US': "No Description."
-        },
-        file: {
-          'en-US': {
-            contentType: 'image/png',
-            fileName: this.newusernameinput + '_profile.png',
-            upload: this.imgsrc
-          }
-        }
-      }
-    })
-
-  })
-  .then(asset => asset.processForAllLocales())
-  .then(asset => {asset.publish(); assetreference=asset;})
-  .then(()=> {return spacereference.createEntry('user', {
-      fields: {
-        name:{
-          'en-US': this.newusernameinput
-        },
-        origin:{
-          'en-US': this.neworigininput
-        },
-        passwort:{
-          'en-US': this.neworigininput
-        },
-        age:{
-          'en-US': this.newageinput
-        },
-        profilepicture:{
-          'en-US': {
-            'sys': {
-              'id': assetreference.sys.id,
-              'linkType': 'Asset',
-              'type': 'Link'
-            }
-          }
-        }
-
-      }
-    })
-
-  }
-    )
-    .then((entry)=>{return entry.update()})
-    .then((entry)=>{return entry.publish()})
-
-
-},
 saveit(){
   this.$refs.Portrait.getPicture();
 
