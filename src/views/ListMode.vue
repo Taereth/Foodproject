@@ -552,6 +552,11 @@ class event {
     } else {
       this.imageURL4 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
     }
+    if (entry.fields.mapPin != undefined) {
+      this.imageURL5 = 'https:' + entry.fields.mapPin.fields.file.url
+    } else {
+      this.imageURL5 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
   }
 }
 
