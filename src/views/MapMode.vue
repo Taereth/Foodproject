@@ -78,6 +78,10 @@ li {
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
 }
 
+.ck-button span {
+    position: relative;
+}
+
 .ck-button {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
     margin: 4px;
@@ -85,6 +89,31 @@ li {
     color: white;
     border-radius: 20px;
     display: inline-flex;
+}
+
+.ck-button input:checked + span {
+    border-radius: 20px;
+    background-color: #12DD8E;
+    color: #fff;
+}
+
+.ck-button span:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/uncheck.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: 1px;
+    left: 12px;
+
+}
+
+.ck-button input:checked ~ :after {
+    top: 0;
+    left: 8px;
+    background: url("../assets/check.svg") no-repeat;
 }
 
 .ck-button label {
@@ -96,19 +125,13 @@ li {
 
 .ck-button label span {
     text-align: center;
-    padding: 8px 15px;
+    padding: 8px 15px 8px 30px;
     display: block;
 }
 
 .ck-button label input {
     position: absolute;
     top: -20px;
-}
-
-.ck-button input:checked + span {
-  border-radius: 30px;
-    background-color: #12DD8E;
-    color: #fff;
 }
 
 .headbar {
