@@ -125,7 +125,7 @@ function initMap(){
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
     var icons = {
       spain: {
-        icon: iconBase + 'flag-map-spain.svg'
+        icon: iconBase + :src="event.imageURL5"
       },
       japan: {
         icon: iconBase + 'flag-map-spain.svg'
@@ -144,15 +144,18 @@ function initMarkers(){
     var eventloc = events[i].location;
     var eventname = events[i].name;
 
+    var flag = events[i].imageURL5;
+
     var mylat = eventloc.lat;
     var mylng = eventloc.lon;
 
     var LatLng = {lat: mylat, lng: mylng};
+    console.log(flag);
 
 
     var marker = new google.maps.Marker({
       position: LatLng,
-      type: 'spain',
+      icon: flag,
       map: mapref,
       title: eventname
     });
@@ -198,6 +201,12 @@ class event{
     this.vegetarian = entry.fields.vegetarian
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
+
+    if (entry.fields.mapPin != undefined) {
+      this.imageURL5 = 'https:' + entry.fields.mapPin.fields.file.url
+    } else {
+      this.imageURL5 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
   }
 }
 

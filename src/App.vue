@@ -26,6 +26,7 @@ body {
   position: fixed;
   overflow-y: scroll;
   padding-top:0px;
+  z-index: 1;
 
 }
 

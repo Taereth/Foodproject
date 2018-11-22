@@ -49,6 +49,7 @@
         <div class="eventFlag"><img class="flagimg" :src="event.imageURL2"></img>
         </div>
         <div class="eventNut">
+          <img :src="event.imageURL4"></img>
           {{event.nutrition}}</div>
 
         <div class="infos">
@@ -92,8 +93,9 @@ li {
 }
 
 .listcontent {
-  padding-top: 120px;
-  margin: 0 10px 0 10px;
+    z-index: -1;
+    padding-top: 120px;
+    margin: 0 10px;
 }
 .infos {
     padding: 20px;
@@ -126,17 +128,56 @@ li {
 
 }
 .eventDate {
-    }
+    position: relative;
+    margin-left: 20px;
+}
+.eventDate:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/date.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: -8px;
+    left: -20px;
+}
 .eventTime {
-    }
+    position: relative;
+}
+.eventTime:after {
 
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/time.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: -8px;
+    left: -18px;
+}
 .eventDistance {
-    }
+    position: relative;
+}
+.eventDistance:after {
 
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/location.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: -9px;
+    left: -15px;
+}
 .eventbox {
     position: relative;
     margin: 10px 10px 20px;
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
+}
+.ck-button span {
+    position: relative;
+    // margin-left: 10px;
 }
 
 .ck-button {
@@ -148,6 +189,32 @@ li {
     display: inline-flex;
 }
 
+.ck-button input:checked + span {
+    border-radius: 20px;
+    // margin-left: 10px;
+    background-color: #12DD8E;
+    color: #fff;
+}
+
+.ck-button span:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/uncheck.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: 1px;
+    left: 12px;
+
+}
+
+.ck-button input:checked ~ :after {
+    top: 0;
+    left: 8px;
+    background: url("../assets/check.svg") no-repeat;
+}
+
 .ck-button label {
     font-weight: bold;
     font-size: 15px;
@@ -157,7 +224,7 @@ li {
 
 .ck-button label span {
     text-align: center;
-    padding: 8px 15px;
+    padding: 8px 15px 8px 30px;
     display: block;
 }
 
@@ -166,11 +233,12 @@ li {
     top: -20px;
 }
 
-.ck-button input:checked + span {
-    border-radius: 30px;
-    background-color: #12DD8E;
-    color: #fff;
-}
+// .ck-button input:checked + span {
+//     border-radius: 30px;
+//     margin-left: 10px;
+//     background-color: #12DD8E;
+//     color: #fff;
+// }
 
 .headbar {
     align-items: baseline;
@@ -296,6 +364,11 @@ class event {
       this.imageURL3 = 'https:' + entry.fields.setIcon.fields.file.url
     } else {
       this.imageURL3 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+    if (entry.fields.nutImg != undefined) {
+      this.imageURL4 = 'https:' + entry.fields.nutImg.fields.file.url
+    } else {
+      this.imageURL4 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
     }
   }
 }
