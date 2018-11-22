@@ -3,6 +3,7 @@
 
 
   <div class="headbar">
+    <img :src="currentUserPicture"></img>
     <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
@@ -19,7 +20,6 @@
     <router-link to="/mapmode">Map</router-link>
   </div>
 
-  <img :src="currentUserPicture"></img>
 
 <div class="filter">
 
@@ -151,7 +151,7 @@ export default {
       vegetarian: true,
       vegan: true,
       meat: true,
-      currentUserPicture: getUserPicture(Helper.getCookie("username"))
+      currentUserPicture: ""
     }
 },methods: {
   updateList(){
@@ -177,6 +177,9 @@ export default {
 
 },
   mounted: function(){
+
+    getUserPicture(Helper.getCookie("username"))
+    .then((result)=>{this.currentUserPicture=result})
 
     const element = document.getElementById("map")
     const options = {
@@ -313,7 +316,7 @@ class event{
 
 function getUserPicture(User){
 
-  window.contentfulClient.getEntries({
+  return window.contentfulClient.getEntries({
   'content_type': 'user',
   'fields.name': User
 })

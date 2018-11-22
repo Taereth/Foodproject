@@ -106,7 +106,7 @@ export default {
                'en-US': this.neworigininput
              },
              passwort:{
-               'en-US': this.neworigininput
+               'en-US': this.newpasswordinput
              },
              age:{
                'en-US': this.newageinput
