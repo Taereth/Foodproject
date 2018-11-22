@@ -28,6 +28,10 @@
 
 
 
+
+
+
+
   <div class="listcontent">
 
 
@@ -84,6 +88,7 @@
     </li>
 
   </div>
+
   <div v-if="showPopup">
     <div class="modal">
       <div class="eventboxpopup" >
@@ -109,7 +114,13 @@
           <button @click="closePopup" class="buttonclose">Back</button>
         </div>
 
-        <div class="detailmap" id="map"></div>
+        <div class="detailmap"></div>
+
+
+
+
+
+
       </div>
     </div>
   </div>
@@ -306,8 +317,8 @@ li {
   margin: 20px 10px;
 }
 
-.buttonapply { 
-  background-color: #12DD8E; 
+.buttonapply {
+  background-color: #12DD8E;
 }
 
 .buttonclose {
@@ -315,28 +326,29 @@ li {
 }
 
 .detailmap{
-  background-color: black;
+  overflow-y: hidden;
+  height:543px;
+  max-width: 398px;
+  display: block;
+  margin-top:20px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-bottom: 20px;
+}
+
+#listmap {
+  overflow-y: hidden;
+  height:543px;
+  max-width: 398px;
+  display: block;
+  margin-top:20px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-bottom: 20px;
+
 }
 
 </style>
-
-<!-- <template>
-  <div class="test">
-
-    <div id="nav">
-      <router-link to="/">TODO_Events</router-link> |
-      <router-link to="/listmode">List</router-link> |
-      <router-link to="/mapmode">Map</router-link>
-    </div> -->
-
-
-
-
-
-
-
-
-
 
 <script>
 // @ is an alias to /src
@@ -346,6 +358,8 @@ import Helper from "@/helper.js"
 //events array
 
 var events = [];
+let mapref;
+let markers = [];
 
 export default {
   name: "listmode",
@@ -381,6 +395,7 @@ export default {
     selectEvent: function(event) {
       this.currentEvent = event;
       this.showPopup = true;
+      setTimeout(_=>initMap(),100)
     },
     closePopup: function(event) {
       this.showPopup = false;
@@ -407,13 +422,90 @@ export default {
       })
       .catch();
 
-    console.log(events);
+
+
+  }
+};
+
+function initMap(){
+
+
+    var maps = document.getElementsByClassName("detailmap");
+
+
+    console.log(maps.length);
+
+    for(var i=0;i<maps.length;i++){
+
+      console.log(maps[i]);
+
+      const element = maps[i]
+      const options = {
+          zoom: 14,
+          center: new google.maps.LatLng(47.071467, 8.277621)
+      }
+      var map = new google.maps.Map(element, options);
+      mapref = map;
+
+      initMarkers(mapref);
+}
+
+}
+
+
+function initMarkers(themap){
+  for(var i = 0; i<events.length; i++){
+
+
+    var eventloc = events[i].location;
+    var eventname = events[i].name;
+
+    var mylat = eventloc.lat;
+    var mylng = eventloc.lon;
+    var flag = events[i].imageURL5;
+
+    var LatLng = {lat: mylat, lng: mylng};
+
+
+    var marker = new google.maps.Marker({
+      position: LatLng,
+      map: themap,
+      title: eventname,
+      icon: flag
+
+    });
+
+
+
+    let contentString = `<div>
+                        <img src="`+ events[i].ownerpicture + `"></img>` + events[i].name + `</h1>
+                        <h1>` + events[i].name + `</h1>
+                        <p>` +  events[i].food + `</p>
+                        <p>` +  events[i].time + `</p>
+                    </div>`;
+
+    let infowindow = new google.maps.InfoWindow({
+                content: " "
+                });
+
+
+    bindWindow(marker,mapref,infowindow,contentString);
+
+    markers.push(marker);
+
 
 
 
 
   }
-};
+}
+
+function bindWindow(marker,map,infowindow,html){
+  marker.addListener('click',function(){
+    infowindow.setContent(html);
+    infowindow.open(mapref,this);
+  })
+}
 
 class event {
   constructor(entry) {

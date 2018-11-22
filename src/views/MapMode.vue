@@ -78,6 +78,10 @@ li {
     box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.04);
 }
 
+.ck-button span {
+    position: relative;
+}
+
 .ck-button {
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
     margin: 4px;
@@ -85,6 +89,31 @@ li {
     color: white;
     border-radius: 20px;
     display: inline-flex;
+}
+
+.ck-button input:checked + span {
+    border-radius: 20px;
+    background-color: #12DD8E;
+    color: #fff;
+}
+
+.ck-button span:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/uncheck.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: 1px;
+    left: 12px;
+
+}
+
+.ck-button input:checked ~ :after {
+    top: 0;
+    left: 8px;
+    background: url("../assets/check.svg") no-repeat;
 }
 
 .ck-button label {
@@ -96,19 +125,13 @@ li {
 
 .ck-button label span {
     text-align: center;
-    padding: 8px 15px;
+    padding: 8px 15px 8px 30px;
     display: block;
 }
 
 .ck-button label input {
     position: absolute;
     top: -20px;
-}
-
-.ck-button input:checked + span {
-  border-radius: 30px;
-    background-color: #12DD8E;
-    color: #fff;
 }
 
 .headbar {
@@ -186,7 +209,167 @@ export default {
     const element = document.getElementById("map")
     const options = {
         zoom: 14,
-        center: new google.maps.LatLng(47.071467, 8.277621)
+        center: new google.maps.LatLng(47.071467, 8.277621),
+        styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
     }
     this.map = new google.maps.Map(element, options);
     mapref = this.map;
@@ -212,18 +395,6 @@ export default {
 
   }
 };
-
-function initMap(){
-
-  const element = document.getElementById("map")
-  const options = {
-      zoom: 14,
-      center: new google.maps.LatLng(47.071467, 8.277621)
-  }
-  this.map = new google.maps.Map(element, options);
-  mapref = this.map;
-
-}
 
 function initMarkers(){
   for(var i = 0; i<events.length; i++){
