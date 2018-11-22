@@ -1,77 +1,81 @@
 <template>
 <div class="test">
 
-  <div class="headbar">
-    <div class="logo">
-      <h3>STUDENTENFUTTER</h3>
+  <div class="sticky">
+
+    <div class="headbar">
+      <div class="logo">
+        <h3>STUDENTENFUTTER</h3>
+      </div>
+      <div class="settings">
+        <!-- <p>SET</p> -->
+
+        <img src="../assets/settings.svg" height="20px"></img>
+      </div>
     </div>
-    <div class="settings" v-for="event in shownevents" v-if="event.seen">
-      <!-- <p>SET</p> -->
 
-      <img :src="event.imageURL3"></img>
+
+    <div class="nav">
+      <router-link to="/">Events</router-link>
+      <router-link to="/listmode">List</router-link>
+      <router-link to="/mapmode">Map</router-link>
     </div>
   </div>
 
-  <div class="headbar">
+  <div class="listcontent">
 
-  </div>
-  <div class="nav">
-    <router-link to="/">Events</router-link>
-    <router-link to="/listmode">List</router-link>
-    <router-link to="/mapmode">Map</router-link>
-  </div>
 
-  <div class="ck-button">
-    <label for="vegbox">
+    <div class="ck-button">
+      <label for="vegbox">
     <input type="checkbox" id="vegbox" v-model="vegetarian" v-on:change="updateList"></input><span>Vegetarian</span>
     </label>
-  </div>
+    </div>
 
-  <div class="ck-button">
-    <label for="veganbox">
+    <div class="ck-button">
+      <label for="veganbox">
   <input type="checkbox" id="veganbox" v-model="vegan" v-on:change="updateList"></input><span>Vegan</span>
   </label>
-  </div>
-  <div class="ck-button">
-    <label for="meatbox">
+    </div>
+    <div class="ck-button">
+      <label for="meatbox">
   <input type="checkbox" id="meatbox" v-model="meat" v-on:change="updateList"></input><span>Meat</span>
 </label>
-  </div>
+    </div>
 
-  <li v-for="event in shownevents" v-if="event.seen">
+    <li v-for="event in shownevents" v-if="event.seen">
 
-    <div class="eventbox">
-      <img :src="event.imageURL1"></img>
-      <div class="eventFlag"><img class="flagimg" :src="event.imageURL2"></img>
-      </div>
-      <div class="eventNut">
-        {{event.nutrition}}</div>
+      <div class="eventbox">
+        <img class="foodimage" :src="event.imageURL1"></img>
+        <div class="eventFlag"><img class="flagimg" :src="event.imageURL2"></img>
+        </div>
+        <div class="eventNut">
+          {{event.nutrition}}</div>
 
-      <div class="infos">
-        <div class="eventDate">
-          {{event.date}}</div>
-        <div class="eventTime">
-          {{event.time}} </div>
-        <div class="eventDistance">
-          {{event.distance}}</div>
-      </div>
+        <div class="infos">
+          <div class="eventDate">
+            {{event.date}}</div>
+          <div class="eventTime">
+            {{event.time}} </div>
+          <div class="eventDistance">
+            {{event.distance}}</div>
+        </div>
 
-      <div class="eventName">
-        {{event.name}} </div>
-      <!-- {{event.owner.fields.name}} -->
+        <div class="eventName">
+          {{event.name}} </div>
+        <!-- {{event.owner.fields.name}} -->
 
-      <div class="eventDesc">
-        {{event.food}}</div>
+        <div class="eventDesc">
+          {{event.food}}</div>
 
 
-      <!-- <div class="eventLoc">
+        <!-- <div class="eventLoc">
         {{event.location}} </div> -->
 
-      <button>Apply</button>
-    </div>
-  </li>
+        <button>Apply</button>
+      </div>
+    </li>
 
-
+  </div>
 </div>
 </template>
 
@@ -86,10 +90,15 @@ body {
 li {
     list-style-type: none;
 }
-.infos{
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
+
+.listcontent {
+  padding-top: 120px;
+  margin: 0 10px 0 10px;
+}
+.infos {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
 
 }
 .eventPic {
@@ -106,26 +115,23 @@ li {
     left: 20px;
 }
 .eventName {
-  padding: 0 20px 10px 20px;
+    padding: 0 20px 10px;
     font-size: 25px;
     text-align: left;
 
 }
 .eventDesc {
-  padding: 0 20px 0 20px;
+    padding: 0 20px;
     text-align: left;
 
 }
 .eventDate {
-
     }
 .eventTime {
-
     }
 
 .eventDistance {
-
-}
+    }
 
 .eventbox {
     position: relative;

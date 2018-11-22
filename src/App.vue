@@ -16,7 +16,20 @@
   color: #2c3e50;
 }
 
-img{
+body {
+  margin: 0;
+}
+
+.sticky {
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  overflow-y: scroll;
+  padding-top:0px;
+
+}
+
+.foodimage{
   height: 200px;
   width: auto;
 }
@@ -27,9 +40,10 @@ img{
 }
 
 .nav {
-  padding: 20px;
+  padding: 15px 0 15px 0;
   a {
     margin: 0px 10px 0px 10px;
+    padding-bottom:5px;
     color: #2c3e50;
     text-decoration: none;
     &.router-link-exact-active {
@@ -38,11 +52,16 @@ img{
   }
 }
 
+.filter {
+  padding-top: 22px;
+}
+
+
 .settings {
     display: flex;
     position: absolute;
     right: 28px;
-    top: 20px;
+    top: 16px;
 }
 
 h3 {

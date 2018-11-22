@@ -1,23 +1,25 @@
 <template>
 <div class="test">
 
+
   <div class="headbar">
     <div class="logo">
       <h3>STUDENTENFUTTER</h3>
     </div>
     <div class="settings">
-      <p> Set </p>
+      <!-- <p>SET</p> -->
+
+      <img src="../assets/settings.svg" height="20px"></img>
     </div>
   </div>
 
-  <div class="headbar">
-
-  </div>
   <div class="nav">
     <router-link to="/">Events</router-link>
     <router-link to="/listmode">List</router-link>
     <router-link to="/mapmode">Map</router-link>
   </div>
+
+<div class="filter">
 
   <div class="ck-button">
     <label for="vegbox">
@@ -36,6 +38,7 @@
   <input type="checkbox" id="meatbox" v-model="meat" v-on:change="updateList"></input><span>Meat</span>
 </label>
   </div>
+</div>
 
 <div id="map"></div>
 
@@ -110,8 +113,15 @@ li {
 }
 
 #map {
-  height: 80vh;
-  width: 80vw;
+  overflow-y: hidden;
+  height:543px;
+  max-width: 398px;
+  display: block;
+  margin-top:20px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-bottom: 20px;
+
 }
 
 </style>
