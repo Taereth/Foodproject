@@ -79,7 +79,8 @@ textarea:focus, input:focus {
     top: 16px;
     border-radius: 50%;
     border-style: solid;
-    border-width:5px;
+    border-width: 0px;
+    box-shadow: 0 0px 30px 0 rgba(0, 0, 0, 0.08);
     border-color:black;
 }
 
