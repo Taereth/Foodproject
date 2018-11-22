@@ -19,6 +19,8 @@
     <router-link to="/mapmode">Map</router-link>
   </div>
 
+  <img :src="currentUserPicture"></img>
+
 <div class="filter">
 
   <div class="ck-button">
@@ -148,7 +150,8 @@ export default {
       shownevents: events,
       vegetarian: true,
       vegan: true,
-      meat: true
+      meat: true,
+      currentUserPicture: getUserPicture(Helper.getCookie("username"))
     }
 },methods: {
   updateList(){
@@ -242,6 +245,7 @@ function initMarkers(){
 
 
     let contentString = `<div>
+                        <img src="`+ events[i].ownerpicture + `"></img>` + events[i].name + `</h1>
                         <h1>` + events[i].name + `</h1>
                         <p>` +  events[i].food + `</p>
                         <p>` +  events[i].time + `</p>
@@ -251,7 +255,7 @@ function initMarkers(){
                 content: " "
                 });
 
-  
+
     bindWindow(marker,mapref,infowindow,contentString);
 
     markers.push(marker);
@@ -282,7 +286,7 @@ class event{
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
     this.picture = entry.fields.picture
-    console.log(this.picture)
+
     this.seen = true
 
     if (entry.fields.mapPin != undefined) {
@@ -291,11 +295,32 @@ class event{
       this.imageURL5 = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
     }
 
+    this.ownerpicture = this.owner.fields.profilepicture;
+
+    if (this.owner.fields.profilepicture != undefined) {
+      this.ownerpicture = 'https:' + this.owner.fields.profilepicture.fields.file.url
+    } else {
+      this.ownerpicture = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
+
+
+
 
 
   }
 }
 
+function getUserPicture(User){
 
+  window.contentfulClient.getEntries({
+  'content_type': 'user',
+  'fields.name': User
+})
+.then((entry)=>{
+  console.log('https:' + entry.items[0].fields.profilepicture.fields.file.url);
+  return 'https:' + entry.items[0].fields.profilepicture.fields.file.url
+})
+}
 
 </script>

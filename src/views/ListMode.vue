@@ -347,6 +347,14 @@ class event {
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
     this.seen = true
+    this.ownerpicture = this.owner.fields.profilepicture;
+
+    if (this.owner.fields.profilepicture != undefined) {
+      this.ownerpicture = 'https:' + this.owner.fields.profilepicture.fields.file.url
+    } else {
+      this.ownerpicture = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
+    }
+
 
     if (entry.fields.picture != undefined) {
       this.imageURL1 = 'https:' + entry.fields.picture.fields.file.url
