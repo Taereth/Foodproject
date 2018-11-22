@@ -50,7 +50,7 @@ export default {
       entries.items.forEach((entry)=>{
       if(entry.fields.passwort == this.passwordinput){
         document.cookie = "username="+this.usernameinput;
-        this.$router.push("/homescreen");
+        this.$router.push("/listmode");
       }
       else{
         this.seen = true;
