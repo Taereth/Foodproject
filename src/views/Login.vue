@@ -13,6 +13,12 @@
       <img src="../assets/settings.svg" height="20px"></img>
     </div>
   </div>
+  <div class="animation">
+
+        <img src="../assets/Karotte-Animation.gif" alt="karotte animation" />
+
+
+  </div>
 
   <div class="userlogin">
 
@@ -34,11 +40,15 @@
 
 <!-- <<<<<<< HEAD -->
 <style scoped lang="scss">
+.animation img{
+  width:100vw;
+  margin: 40px 0 45px 0;
+
+}
 
 .userlogin {
   justify-content: center;
-  margin-top: 40%;
-  margin-bottom: 60%;
+
 }
 h6 {
   font-size: 10px;
