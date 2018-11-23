@@ -41,6 +41,7 @@ textarea:focus, input:focus {
 .foodimage{
   height: 200px;
   width: auto;
+  padding-top:60px;
 }
 
 .flagimg{

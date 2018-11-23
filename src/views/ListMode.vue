@@ -32,7 +32,7 @@
 
 
 
-  <div class="listcontent">
+  <div :class="[showPopup ? 'noScroll' :'' , 'listcontent' ]">
 
 
 
@@ -114,7 +114,7 @@
           <button @click="closePopup" class="buttonclose">Back</button>
         </div>
 
-        <div class="detailmap"></div>
+        <div class="detailmap" id="popUpmap"></div>
 
 
 
@@ -144,6 +144,11 @@ li {
     padding-top: 120px;
     margin: 0;
 }
+
+.listcontent.noScroll {
+  height: 70vh;
+  overflow: hidden;
+}
 .infos {
     padding: 20px;
     display: flex;
@@ -170,7 +175,7 @@ li {
 }
 
 .eventName {
-    padding: 0 20px 10px;
+    padding: 0 20px 20px;
     font-size: 25px;
     text-align: left;
 
@@ -296,7 +301,7 @@ li {
 
 .modal {
     z-index: 1;
-    position: absolute;
+    position: fixed;
     top: 0;
     background-color:rgba(0,0,0,0.4);
     width: 100%;
@@ -306,10 +311,13 @@ li {
 
 .eventboxpopup {
   background-color:white;
+  height:93.67vh;
   width: auto;
   z-index: 2;
   position: relative;
-  margin: 20px 20px 10px 20px;
+  padding-bottom: 10px;
+  margin: 20px 20px 20px 20px;
+
 }
 
 .controlbuttons {
@@ -318,29 +326,74 @@ li {
 }
 
 .buttonapply {
+  font-size:15px;
+  position: relative;
   background-color: #12DD8E;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  margin: 4px;
+  color: white;
+  border-radius: 20px;
+  display: inline-flex;
+  text-align: center;
+  padding: 8px 15px 10px 30px;
+  font-weight: bold;
+  font-size:15px;
+}
+
+.buttonapply:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/apply.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: 1px;
+    left: 11px;
 }
 
 .buttonclose {
+  position: relative;
   background-color: #C0C0C0;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  margin: 4px;
+  color: white;
+  border-radius: 20px;
+  display: inline-flex;
+  text-align: center;
+  padding: 8px 15px 10px 30px;
+  font-weight: bold;
+  font-size:15px;
 }
 
-.detailmap{
-  overflow-y: hidden;
-  height:543px;
-  max-width: 398px;
-  display: block;
-  margin-top:20px;
-  margin-left: 18px;
-  margin-right: 18px;
-  margin-bottom: 20px;
+.buttonclose:after {
+
+    content: "";
+    position: absolute;
+    margin-top: 10px;
+    background: url("../assets/uncheck.svg") no-repeat;
+    height: 40px;
+    width: 60px;
+    top: 2px;
+    left: 12px;
 }
 
-#listmap {
-  overflow-y: hidden;
-  height:543px;
+// .detailmap{
+//   overflow: hidden;
+//   height:243px;
+//   max-width: 398px;
+//   display: block;
+//   margin-top:20px;
+//   margin-left: 18px;
+//   margin-right: 18px;
+//   margin-bottom: 20px;
+// }
+
+
+
+#popUpmap{
+  height: 25%;
   max-width: 398px;
-  display: block;
   margin-top:20px;
   margin-left: 18px;
   margin-right: 18px;
