@@ -404,8 +404,15 @@ export default {
   },
   mounted: function() {
 
+    events = [];
+    this.shownevents = events;
+
+
+
     getUserPicture(Helper.getCookie("username"))
     .then((result)=>{this.currentUserPicture=result})
+
+
 
 
     window.contentfulClient.getEntries({

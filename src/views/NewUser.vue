@@ -31,6 +31,8 @@
 </template>
 
 <style>
+
+
 .headbar{
   margin-bottom: 20px;
 }
@@ -219,6 +221,8 @@ blobready(){
 
 },
   mounted: function(){
+
+
 
   }
 };

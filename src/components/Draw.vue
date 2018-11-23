@@ -47,6 +47,8 @@ export default {
 }
   },
   mounted: function() {
+
+
     console.log(this.$refs.p5);
     console.log(this.$route);
     let that = this;

@@ -203,6 +203,10 @@ export default {
 },
   mounted: function(){
 
+    markers = [];
+    events = [];
+    this.shownevents = events;
+
     getUserPicture(Helper.getCookie("username"))
     .then((result)=>{this.currentUserPicture=result})
 
