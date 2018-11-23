@@ -17,7 +17,7 @@
     <p>Username</p>
     <input class="fillin" v-model="newusernameinput" placeholder="USERNAME">
     <p>Password</p>
-    <input class="fillin" v-model="newpasswordinput" placeholder="PASSWORD">
+    <input class="fillin" type="password" v-model="newpasswordinput" placeholder="PASSWORD">
     <p>Age</p>
     <input class="fillin" v-model.number="newageinput" placeholder="AGE">
     <p>Origin</p>

@@ -21,7 +21,7 @@
     <p>Username</p>
     <input class="fillin" v-model="usernameinput" placeholder="USERNAME">
     <p>Password</p>
-    <input class="fillin"v-model="passwordinput" placeholder="PASSWORT">
+    <input class="fillin" type="password" v-model="passwordinput" placeholder="PASSWORT">
     <p> </p>
     <button class="loginbtn" v-on:click="login">LOGIN</button><button class="loginbtn" v-on:click="signup">SIGN UP</button>
     <p id="errormessage"><span v-if="seen">USER DOES NOT EXIST</span></p>

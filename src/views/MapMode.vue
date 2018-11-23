@@ -421,8 +421,9 @@ function initMarkers(){
 
 
     let contentString = `<div>
-                        <img src="`+ events[i].ownerpicture + `"></img>` + events[i].name + `</h1>
+                        <img style = "border: solid; border-radius: 50%; border-width: 5px; height: 80px; "src="`+ events[i].ownerpicture + `"></img>
                         <h1>` + events[i].name + `</h1>
+                        <p>von `+events[i].ownername+ `</p>
                         <p>` +  events[i].food + `</p>
                         <p>` +  events[i].time + `</p>
                     </div>`;
@@ -462,6 +463,7 @@ class event{
     this.vegan = entry.fields.vegan
     this.meat = entry.fields.meat
     this.picture = entry.fields.picture
+    this.ownername = entry.fields.owner.fields.name
 
     this.seen = true
 
@@ -478,11 +480,6 @@ class event{
     } else {
       this.ownerpicture = 'http://trivialpursuitsdotorg.files.wordpress.com/2012/10/penis.png'
     }
-
-
-
-
-
 
   }
 }
