@@ -60,6 +60,8 @@
 }
 
 .loginbtn {
+  border-style: none;
+  -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
   margin: 4px;
   background-color: #12DD8E;
