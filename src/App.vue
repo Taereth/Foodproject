@@ -24,7 +24,7 @@ textarea:focus, input:focus {
   outline:none;
 }
 
-*focus {
+*:focus {
   outline:none;
 }
 
